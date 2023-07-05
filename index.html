@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>永世乐土 - hanhan3344's blog</title><meta name="author" content="hanhan3344,hans1r@outlook.com"><meta name="copyright" content="hanhan3344"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="hanhan3344&#39;s blog">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>永世乐土 - hanhan3344's blog</title><meta name="author" content="hanhan3344,hans1r@outlook.com"><meta name="copyright" content="hanhan3344"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="hanhan3344&#39;s blog">
 <meta property="og:type" content="website">
 <meta property="og:title" content="永世乐土">
 <meta property="og:url" content="https://hanhan3344.github.io/index.html">
@@ -8,10 +8,10 @@
 <meta property="og:image" content="https://hanhan3344-tx-bk-1313563340.cos.ap-guangzhou.myqcloud.com/typora/bronya01.jpg">
 <meta property="article:author" content="hanhan3344">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://hanhan3344-tx-bk-1313563340.cos.ap-guangzhou.myqcloud.com/typora/bronya01.jpg"><link rel="shortcut icon" href="https://hanhan3344-tx-bk-1313563340.cos.ap-guangzhou.myqcloud.com/typora/bronya02.png"><link rel="canonical" href="https://hanhan3344.github.io/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+<meta name="twitter:image" content="https://hanhan3344-tx-bk-1313563340.cos.ap-guangzhou.myqcloud.com/typora/bronya01.jpg"><link rel="shortcut icon" href="https://hanhan3344-tx-bk-1313563340.cos.ap-guangzhou.myqcloud.com/typora/bronya02.png"><link rel="canonical" href="https://hanhan3344.github.io/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
   root: '/',
   algolia: undefined,
-  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":true,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
   translate: undefined,
   noticeOutdate: undefined,
   highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
@@ -25,7 +25,7 @@
     post: false
   },
   runtime: '',
-  date_suffix: {
+  dateSuffix: {
     just: '刚刚',
     min: '分钟前',
     hour: '小时前',
@@ -43,14 +43,19 @@
   },
   isPhotoFigcaption: false,
   islazyload: false,
-  isAnchor: false
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
 }</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
   title: '永世乐土',
   isPost: false,
   isHome: true,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2023-07-03 20:39:14'
+  postUpdate: '2023-07-05 16:40:43'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -107,6 +112,21 @@
       document.head.appendChild(script)
     })
   
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
       win.activateDarkMode = function () {
         document.documentElement.setAttribute('data-theme', 'dark')
         if (document.querySelector('meta[name="theme-color"]') !== null) {
@@ -139,23 +159,28 @@
       }
     }
     detectApple()
-    })(window)</script><link rel="stylesheet" href="/css/bg.css"><meta name="generator" content="Hexo 5.4.2"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>const preloader = {
-  endLoading: () => {
-    document.body.style.overflow = 'auto';
-    document.getElementById('loading-box').classList.add("loaded")
-  },
-  initLoading: () => {
-    document.body.style.overflow = '';
-    document.getElementById('loading-box').classList.remove("loaded")
-
+    })(window)</script><link rel="stylesheet" href="/css/bg.css"><meta name="generator" content="Hexo 5.4.2"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
   }
-}
-window.addEventListener('load',()=> { preloader.endLoading() })
 
-if (true) {
-  document.addEventListener('pjax:send', () => { preloader.initLoading() })
-  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
-}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://hanhan3344-tx-bk-1313563340.cos.ap-guangzhou.myqcloud.com/typora/bronya01.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">4</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">9</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-sharp fa-solid fa-folder"></i><span> 2022CADC对地资料</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" target="_blank" rel="noopener" href="https://github.com/Nangong-Yufeng/flight-control/tree/main/project/NGYF-003"><i class="fa-fw fas fa-sharp fa-solid fa-code"></i><span> 项目代码</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://www.aliyundrive.com/s/ku2mx3yey3J"><i class="fa-fw fas fa-sharp fa-solid fa-camera-retro"></i><span> 图传测试,提取码u6p8</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://www.aliyundrive.com/s/L8UWFgf1gBX"><i class="fa-fw fas fa-video"></i><span> 程序录屏,提取码um66</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-solid fa-dollar-sign"></i><span> 捐赠</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('https://hanhan3344-tx-bk-1313563340.cos.ap-guangzhou.myqcloud.com/typora/background01.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">永世乐土</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-sharp fa-solid fa-folder"></i><span> 2022CADC对地资料</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" target="_blank" rel="noopener" href="https://github.com/Nangong-Yufeng/flight-control/tree/main/project/NGYF-003"><i class="fa-fw fas fa-sharp fa-solid fa-code"></i><span> 项目代码</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://www.aliyundrive.com/s/ku2mx3yey3J"><i class="fa-fw fas fa-sharp fa-solid fa-camera-retro"></i><span> 图传测试,提取码u6p8</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://www.aliyundrive.com/s/L8UWFgf1gBX"><i class="fa-fw fas fa-video"></i><span> 程序录屏,提取码um66</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-solid fa-dollar-sign"></i><span> 捐赠</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">永世乐土</h1><div id="site-subtitle"><span id="subtitle"></span></div><div id="site_social_icons"><a class="social-icon" href="https://github.com/hanhan3344" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:hans1r@outlook.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="http://wpa.qq.com/msgrd?v=3&amp;uin=915489043&amp;site=qq&amp;menu=yes" target="_blank" title="QQ"><i class="fab fa-qq"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="post_cover left"><a href="/2023/07/03/QA01/" title="QA01"><img class="post_bg" src="https://images.weserv.nl/?url=https://hanhan3344-tx-bk-1313563340.cos.ap-guangzhou.myqcloud.com/typora/24-08-B.jpg&amp;default=https://hanhan3344-tx-bk-1313563340.cos.ap-guangzhou.myqcloud.com/typora/24-08-B.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="QA01"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/07/03/QA01/" title="QA01">QA01</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-07-03T10:49:47.000Z" title="发表于 2023-07-03 18:49:47">2023-07-03</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%8D%97%E5%B7%A5%E5%BE%A1%E9%A3%8E/">南工御风</a></span></div><div class="content"> QA01
+  preloader.initLoading()
+  window.addEventListener('load',() => { preloader.endLoading() })
+
+  if (true) {
+    document.addEventListener('pjax:send', () => { preloader.initLoading() })
+    document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+  }
+})()</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://hanhan3344-tx-bk-1313563340.cos.ap-guangzhou.myqcloud.com/typora/bronya01.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">4</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">9</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-sharp fa-solid fa-folder"></i><span> 2022CADC对地资料</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" target="_blank" rel="noopener" href="https://github.com/Nangong-Yufeng/flight-control/tree/main/project/NGYF-003"><i class="fa-fw fas fa-sharp fa-solid fa-code"></i><span> 项目代码</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://www.aliyundrive.com/s/ku2mx3yey3J"><i class="fa-fw fas fa-sharp fa-solid fa-camera-retro"></i><span> 图传测试,提取码u6p8</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://www.aliyundrive.com/s/L8UWFgf1gBX"><i class="fa-fw fas fa-video"></i><span> 程序录屏,提取码um66</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-solid fa-dollar-sign"></i><span> 捐赠</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('https://hanhan3344-tx-bk-1313563340.cos.ap-guangzhou.myqcloud.com/typora/background01.png')"><nav id="nav"><span id="blog-info"><a href="/" title="永世乐土"><span class="site-name">永世乐土</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-sharp fa-solid fa-folder"></i><span> 2022CADC对地资料</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" target="_blank" rel="noopener" href="https://github.com/Nangong-Yufeng/flight-control/tree/main/project/NGYF-003"><i class="fa-fw fas fa-sharp fa-solid fa-code"></i><span> 项目代码</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://www.aliyundrive.com/s/ku2mx3yey3J"><i class="fa-fw fas fa-sharp fa-solid fa-camera-retro"></i><span> 图传测试,提取码u6p8</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://www.aliyundrive.com/s/L8UWFgf1gBX"><i class="fa-fw fas fa-video"></i><span> 程序录屏,提取码um66</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-solid fa-dollar-sign"></i><span> 捐赠</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">永世乐土</h1><div id="site-subtitle"><span id="subtitle"></span></div><div id="site_social_icons"><a class="social-icon" href="https://github.com/hanhan3344" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:hans1r@outlook.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="http://wpa.qq.com/msgrd?v=3&amp;uin=915489043&amp;site=qq&amp;menu=yes" target="_blank" title="QQ"><i class="fab fa-qq"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="post_cover left"><a href="/2023/07/03/QA01/" title="QA01"><img class="post-bg" src="https://images.weserv.nl/?url=https://hanhan3344-tx-bk-1313563340.cos.ap-guangzhou.myqcloud.com/typora/24-08-B.jpg&amp;default=https://hanhan3344-tx-bk-1313563340.cos.ap-guangzhou.myqcloud.com/typora/24-08-B.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="QA01"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/07/03/QA01/" title="QA01">QA01</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-07-03T10:49:47.000Z" title="发表于 2023-07-03 18:49:47">2023-07-03</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%8D%97%E5%B7%A5%E5%BE%A1%E9%A3%8E/">南工御风</a></span></div><div class="content"> QA01
  目标任务要求不够详细，不知道是什么
 
 参考QQ群文件的“中国飞行器设计创新大赛规则（2023年).pdf -&gt;固定翼无人机侦察与打击 -&gt;5.竞赛方法”
@@ -170,7 +195,7 @@ if (true) {
 
  5.7 参赛选手可自由选择自动或手动的方式起飞。若选择自动方式起飞，须在飞行器起飞前将遥控器置于地面；若选择手动方式起飞，须在飞行器进入目标区之前将遥控器置于地面，以确认自主飞行切换成功。
 
-今年新增的加分项目，自动起飞，可以参考PX4 User Guide中的ta ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/07/03/%E3%80%90%E9%A3%9E%E6%8E%A7%E3%80%9101-%E5%AE%89%E8%A3%85%E3%80%81%E6%8E%A5%E7%BA%BF%E3%80%81%E8%BF%9E%E6%8E%A5%E5%9C%B0%E9%9D%A2%E7%AB%99/" title="【飞控】01_安装、接线、连接地面站"><img class="post_bg" src="https://images.weserv.nl/?url=https://hanhan3344-tx-bk-1313563340.cos.ap-guangzhou.myqcloud.com/typora/20230517101949.png&amp;default=https://hanhan3344-tx-bk-1313563340.cos.ap-guangzhou.myqcloud.com/typora/20230517101949.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【飞控】01_安装、接线、连接地面站"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/07/03/%E3%80%90%E9%A3%9E%E6%8E%A7%E3%80%9101-%E5%AE%89%E8%A3%85%E3%80%81%E6%8E%A5%E7%BA%BF%E3%80%81%E8%BF%9E%E6%8E%A5%E5%9C%B0%E9%9D%A2%E7%AB%99/" title="【飞控】01_安装、接线、连接地面站">【飞控】01_安装、接线、连接地面站</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-07-03T10:48:51.000Z" title="发表于 2023-07-03 18:48:51">2023-07-03</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%8D%97%E5%B7%A5%E5%BE%A1%E9%A3%8E/">南工御风</a></span></div><div class="content"> 一. 安装、接线、连接地面站
+今年新增的加分项目，自动起飞，可以参考PX4 User Guide中的ta ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/07/03/%E3%80%90%E9%A3%9E%E6%8E%A7%E3%80%9101-%E5%AE%89%E8%A3%85%E3%80%81%E6%8E%A5%E7%BA%BF%E3%80%81%E8%BF%9E%E6%8E%A5%E5%9C%B0%E9%9D%A2%E7%AB%99/" title="【飞控】01_安装、接线、连接地面站"><img class="post-bg" src="https://images.weserv.nl/?url=https://hanhan3344-tx-bk-1313563340.cos.ap-guangzhou.myqcloud.com/typora/20230517101949.png&amp;default=https://hanhan3344-tx-bk-1313563340.cos.ap-guangzhou.myqcloud.com/typora/20230517101949.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【飞控】01_安装、接线、连接地面站"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/07/03/%E3%80%90%E9%A3%9E%E6%8E%A7%E3%80%9101-%E5%AE%89%E8%A3%85%E3%80%81%E6%8E%A5%E7%BA%BF%E3%80%81%E8%BF%9E%E6%8E%A5%E5%9C%B0%E9%9D%A2%E7%AB%99/" title="【飞控】01_安装、接线、连接地面站">【飞控】01_安装、接线、连接地面站</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-07-03T10:48:51.000Z" title="发表于 2023-07-03 18:48:51">2023-07-03</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%8D%97%E5%B7%A5%E5%BE%A1%E9%A3%8E/">南工御风</a></span></div><div class="content"> 一. 安装、接线、连接地面站
 *PX4官网UserGuide地址（**https://docs.px4.io/v1.12/en/**），强烈建议细读几遍*
  接线
 详见PX4官网（以我们去年用的CUAV V5+为例）
@@ -201,7 +226,7 @@ PX4官方推荐地面站QGroundControl，下载安装对应你的操作系统的
 
 其中，左上角“Not Ready”代表飞行器现在的状态即未准备好，飞行器的状态按经验以及实操顺序可列为以下几种：
 
-Not Ready（黄色底色）：飞行器未准备就绪，有的操作未完成（比如RC遥控器未连接、飞机姿态错误（未水平放置）、空速管故障、GPS未搜到星等），无法ARM飞机。如你所见GPS未 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2022/12/07/%E9%83%A8%E7%BD%B2code-server%E8%AE%A9%E4%BD%A0%E5%9C%A8iPad%E4%B8%8A%E4%BD%BF%E7%94%A8VScode/" title="部署code-server让你在iPad上使用VScode"><img class="post_bg" src="https://images.weserv.nl/?url=https://hanhan3344-tx-bk-1313563340.cos.ap-guangzhou.myqcloud.com/typora/image-20221207014215268.png&amp;default=https://hanhan3344-tx-bk-1313563340.cos.ap-guangzhou.myqcloud.com/typora/image-20221207014215268.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="部署code-server让你在iPad上使用VScode"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/12/07/%E9%83%A8%E7%BD%B2code-server%E8%AE%A9%E4%BD%A0%E5%9C%A8iPad%E4%B8%8A%E4%BD%BF%E7%94%A8VScode/" title="部署code-server让你在iPad上使用VScode">部署code-server让你在iPad上使用VScode</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-12-06T16:58:55.000Z" title="发表于 2022-12-07 00:58:55">2022-12-07</time></span></div><div class="content">
+Not Ready（黄色底色）：飞行器未准备就绪，有的操作未完成（比如RC遥控器未连接、飞机姿态错误（未水平放置）、空速管故障、GPS未搜到星等），无法ARM飞机。如你所见GPS未 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2022/12/07/%E9%83%A8%E7%BD%B2code-server%E8%AE%A9%E4%BD%A0%E5%9C%A8iPad%E4%B8%8A%E4%BD%BF%E7%94%A8VScode/" title="部署code-server让你在iPad上使用VScode"><img class="post-bg" src="https://images.weserv.nl/?url=https://hanhan3344-tx-bk-1313563340.cos.ap-guangzhou.myqcloud.com/typora/image-20221207014215268.png&amp;default=https://hanhan3344-tx-bk-1313563340.cos.ap-guangzhou.myqcloud.com/typora/image-20221207014215268.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="部署code-server让你在iPad上使用VScode"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/12/07/%E9%83%A8%E7%BD%B2code-server%E8%AE%A9%E4%BD%A0%E5%9C%A8iPad%E4%B8%8A%E4%BD%BF%E7%94%A8VScode/" title="部署code-server让你在iPad上使用VScode">部署code-server让你在iPad上使用VScode</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-12-06T16:58:55.000Z" title="发表于 2022-12-07 00:58:55">2022-12-07</time></span></div><div class="content">
 所需材料: 一个可用的云服务器, iPad(任何能使用浏览器的电子设备)
 
  在服务器部署code-server
@@ -256,7 +281,7 @@ Not Ready（黄色底色）：飞行器未准备就绪，有的操作未完成�
 1sudo service ssh restart
 
 
- ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2022/12/05/PX4%E4%BB%BF%E7%9C%9F%E7%8E%AF%E5%A2%83%E7%9A%84%E6%90%AD%E5%BB%BA/" title="PX4仿真环境的搭建"><img class="post_bg" src="https://images.weserv.nl/?url=https://hanhan3344-tx-bk-1313563340.cos.ap-guangzhou.myqcloud.com/typora/image.png&amp;default=https://hanhan3344-tx-bk-1313563340.cos.ap-guangzhou.myqcloud.com/typora/image.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="PX4仿真环境的搭建"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/12/05/PX4%E4%BB%BF%E7%9C%9F%E7%8E%AF%E5%A2%83%E7%9A%84%E6%90%AD%E5%BB%BA/" title="PX4仿真环境的搭建">PX4仿真环境的搭建</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-12-05T13:24:35.000Z" title="发表于 2022-12-05 21:24:35">2022-12-05</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%8D%97%E5%B7%A5%E5%BE%A1%E9%A3%8E/">南工御风</a></span></div><div class="content"> 通过Docker搭建（比较推荐）
+ ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2022/12/05/PX4%E4%BB%BF%E7%9C%9F%E7%8E%AF%E5%A2%83%E7%9A%84%E6%90%AD%E5%BB%BA/" title="PX4仿真环境的搭建"><img class="post-bg" src="https://images.weserv.nl/?url=https://hanhan3344-tx-bk-1313563340.cos.ap-guangzhou.myqcloud.com/typora/image.png&amp;default=https://hanhan3344-tx-bk-1313563340.cos.ap-guangzhou.myqcloud.com/typora/image.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="PX4仿真环境的搭建"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/12/05/PX4%E4%BB%BF%E7%9C%9F%E7%8E%AF%E5%A2%83%E7%9A%84%E6%90%AD%E5%BB%BA/" title="PX4仿真环境的搭建">PX4仿真环境的搭建</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-12-05T13:24:35.000Z" title="发表于 2022-12-05 21:24:35">2022-12-05</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%8D%97%E5%B7%A5%E5%BE%A1%E9%A3%8E/">南工御风</a></span></div><div class="content"> 通过Docker搭建（比较推荐）
 
 优点: 搭建方便, 可以轻松地在windows系统上运行, 开发与调试可以同平台进行
 缺点: 性能损耗大(需要较高性能), gazebo模拟器没有图形化界面(其实无关紧要)
@@ -286,29 +311,36 @@ Not Ready（黄色底色）：飞行器未准备就绪，有的操作未完成�
             </div>
             <ul class="card-category-list" id="aside-cat-list">
             <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%8D%97%E5%B7%A5%E5%BE%A1%E9%A3%8E/"><span class="card-category-list-name">南工御风</span><span class="card-category-list-count">3</span></a></li>
-            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/code-server/" style="font-size: 1.1em; color: #999">code-server</a> <a href="/tags/docker/" style="font-size: 1.1em; color: #999">docker</a> <a href="/tags/mavsdk/" style="font-size: 1.1em; color: #999">mavsdk</a> <a href="/tags/px4/" style="font-size: 1.5em; color: #99a9bf">px4</a> <a href="/tags/qgc/" style="font-size: 1.1em; color: #999">qgc</a> <a href="/tags/ubuntu/" style="font-size: 1.3em; color: #99a1ac">ubuntu</a> <a href="/tags/yolo/" style="font-size: 1.1em; color: #999">yolo</a> <a href="/tags/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 1.1em; color: #999">云服务器</a> <a href="/tags/%E9%A3%9E%E6%8E%A7/" style="font-size: 1.1em; color: #999">飞控</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/07/"><span class="card-archive-list-date">七月 2023</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/12/"><span class="card-archive-list-date">十二月 2022</span><span class="card-archive-list-count">2</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">4</div></div><div class="webinfo-item"><div class="item-name">本站总字数 :</div><div class="item-count">4.2k</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2023-07-03T12:39:14.107Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023 By hanhan3344</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function subtitleType () {
-  if (true) { 
-    window.typed = new Typed("#subtitle", {
-      strings: ["致以无瑕之人"],
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/mavsdk/" style="font-size: 1.1em; color: #999">mavsdk</a> <a href="/tags/docker/" style="font-size: 1.1em; color: #999">docker</a> <a href="/tags/ubuntu/" style="font-size: 1.3em; color: #99a1ac">ubuntu</a> <a href="/tags/%E9%A3%9E%E6%8E%A7/" style="font-size: 1.1em; color: #999">飞控</a> <a href="/tags/yolo/" style="font-size: 1.1em; color: #999">yolo</a> <a href="/tags/px4/" style="font-size: 1.5em; color: #99a9bf">px4</a> <a href="/tags/code-server/" style="font-size: 1.1em; color: #999">code-server</a> <a href="/tags/qgc/" style="font-size: 1.1em; color: #999">qgc</a> <a href="/tags/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 1.1em; color: #999">云服务器</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/07/"><span class="card-archive-list-date">七月 2023</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/12/"><span class="card-archive-list-date">十二月 2022</span><span class="card-archive-list-count">2</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">4</div></div><div class="webinfo-item"><div class="item-name">本站总字数 :</div><div class="item-count">4.2k</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2023-07-05T08:40:43.307Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023 By hanhan3344</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>window.typedJSFn = {
+  init: (str) => {
+    window.typed = new Typed('#subtitle', Object.assign({
+      strings: str,
       startDelay: 300,
       typeSpeed: 150,
-      loop: false,
-      backSpeed: 50
-    })
-  } else {
-    document.getElementById("subtitle").innerHTML = '致以无瑕之人'
+      loop: true,
+      backSpeed: 50,
+    }, null))
+  },
+  run: (subtitleType) => {
+    if (true) {
+      if (typeof Typed === 'function') {
+        subtitleType()
+      } else {
+        getScript('https://cdn.jsdelivr.net/npm/typed.js/dist/typed.umd.min.js').then(subtitleType)
+      }
+    } else {
+      subtitleType()
+    }
   }
 }
-
-if (true) {
-  if (typeof Typed === 'function') {
-    subtitleType()
+</script><script>function subtitleType () {
+  if (true) {
+    typedJSFn.init(["致以无瑕之人"])
   } else {
-    getScript('https://cdn.jsdelivr.net/npm/typed.js/lib/typed.min.js').then(subtitleType)
+    document.getElementById("subtitle").textContent = "致以无瑕之人"
   }
-} else {
-  subtitleType()
-}</script></div><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="true" data-text="T,r,u,E" data-fontsize="15px" data-random="false" async="async"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+}
+typedJSFn.run(subtitleType)</script></div><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="true" data-text="T,r,u,E" data-fontsize="15px" data-random="false" async="async"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
 
 var pjax = new Pjax({
   elements: 'a:not([target="_blank"])',
@@ -356,7 +388,6 @@ document.addEventListener('pjax:complete', function () {
 
   GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
 
-  typeof chatBtnFn === 'function' && chatBtnFn()
   typeof panguInit === 'function' && panguInit()
 
   // google analytics
@@ -375,4 +406,4 @@ document.addEventListener('pjax:error', (e) => {
   if (e.request.status === 404) {
     pjax.loadUrl('/404.html')
   }
-})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
