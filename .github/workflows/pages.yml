@@ -49,8 +49,8 @@ jobs:
       # 安装主题
       # - name: Install Theme
         # run: git submodule add https://github.com/jerryc127/hexo-theme-butterfly.git themes/butterfly
-      - name: Clean
-        run: npm run clean
+      # - name: Clean
+        # run: npm run clean
       - name: Build
         run: npm run build
       - name: Deploy
