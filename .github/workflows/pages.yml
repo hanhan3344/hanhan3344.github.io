@@ -62,6 +62,10 @@ jobs:
         run: |
           npm install
 
+      - name: Clean hexo
+        run: |
+          npm run clean
+
       - name: Deploy hexo
         run: |
           npm run deploy
