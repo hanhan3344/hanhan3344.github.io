@@ -47,8 +47,8 @@ jobs:
       #   run: git rm -f --cached themes/tenacity
         # run: git submodule deinit themes/tenacity && git rm themes/tenacity
       # 安装主题
-      - name: Install Theme
-        run: git submodule add https://github.com/jerryc127/hexo-theme-butterfly.git themes/butterfly
+      # - name: Install Theme
+        # run: git submodule add https://github.com/jerryc127/hexo-theme-butterfly.git themes/butterfly
       - name: Clean
         run: npm run clean
       - name: Build
