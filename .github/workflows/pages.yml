@@ -5,106 +5,63 @@ on:
   push:
     branches:
       - main  # default branch
+env:
+  GIT_USER: hanhan3344
+  GIT_EMAIL: 915489043@qq.com
+  THEME_REPO: jerryc127/hexo-theme-butterfly
+  THEME_BRANCH: master
+  DEPLOY_REPO: hanhan3344/hanhan3344.github.io
+  DEPLOY_BRANCH: gh-pages
+
 jobs:
-  # 子任务
-  pages:
-    runs-on: ubuntu-latest # 定运行所需要的虚拟机环境
-    permissions:
-      contents: write
+  build:
+    name: Build on node ${{ matrix.node_version }} and ${{ matrix.os }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node_version: [14.x]
+
     steps:
-    # - name: Checkout
-    #   uses: actions/checkout@v1
-    #   with:
-    #     submodules: true # Checkout private submodules(themes or something else).
-    
-    # Caching dependencies to speed up workflows. (GitHub will remove any cache entries that have not been accessed in over 7 days.)
-    - name: Cache node modules
-      uses: actions/cache@v1
-      id: cache
-      with:
-        path: node_modules
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-node-
-    - name: Install Dependencies
-      if: steps.cache.outputs.cache-hit != 'true'
-      run: npm install
-    
-    # Deploy hexo blog website.
-    - name: Deploy
-      id: deploy
-      uses: sma11black/hexo-action@v1.0.0
-      with:
-        deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-        user_name: hanhan3344
-        user_email: 915489043@qq.com
-    # Use the output from the `deploy` step(use for test action)
-    - name: Get the output
-      run: |
-        echo "${{ steps.deploy.outputs.notify }}"
-    # steps:
-    #   - uses: actions/checkout@v2
-        # with:
-        #   submodules: true
-        #   fetch-depth: 0
-      # 每个name表示一个步骤:step
-      # - name: Use Node.js 16.x
-      #   uses: actions/setup-node@v2
-      #   with:
-      #     node-version: '16.14.1' # 自己正在使用的node版本即可
-      # - run: node -v # 查看node版本号
-      # 缓存依赖项: https://docs.github.com/cn/actions/using-workflows/caching-dependencies-to-speed-up-workflows
-      # - name: Cache NPM dependencies
-      #   uses: actions/cache@v2
-      #   with:
-      #     # npm cache files are stored in `~/.npm` on Linux/macOS
-      #     path: ~/.npm
-      #     # path: node_modules
-      #     key: ${{ runner.OS }}-npm-cache
-      #     restore-keys: |
-      #       ${{ runner.OS }}-npm-cache
-      # 查看路径 : /home/runner/work/blog/blog
-      # - name: Look Path
-      #   run: pwd
-      # 查看文件
-      # - name: Look Dir List
-      #   run: tree -L 3 -a
-      # # 第一次或者依赖发生变化的时候执行 Install Dependencies，其它构建的时候不需要这一步
-      # - name: Install Dependencies
-      #   run: npm install
-      # - name: Look Dir List
-      #   run: tree -L 3 -a
-      # - name: clean theme cache
-      #   run: git rm -f --cached themes/tenacity
-        # run: git submodule deinit themes/tenacity && git rm themes/tenacity
-      # 安装主题
-      # - name: Install Theme
-        # run: git submodule add https://github.com/jerryc127/hexo-theme-butterfly.git themes/butterfly
-      # - name: Clean
-        # run: npm run clean
-      # - name: Build
-      #   run: npm run build
-      # - name: Deploy
-      #   id: deploy
-      #   uses: sma11black/hexo-action@v1.0.0
-      #   with:
-      #     deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-      #     user_name: hanhan3344
-      #     user_email: 915489043@qq.com
-      # - name: Deploy
-      #   uses: peaceiris/actions-gh-pages@v3
-      #   with:
-      #     deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY  }}
-      #     user_name: hanhan3344
-      #     user_email: 915489043@qq.com
-      #     # 获取提交文章源码时的commit message，作为发布gh-pages分支的信息
-      #     commit_message: ${{ github.event.head_commit.message }}
-      #     full_commit_message: ${{ github.event.head_commit.message }}
-      #     github_token: ${{ secrets.GITHUB_TOKEN }}
-      #     # GITHUB_TOKEN不是个人访问令牌，GitHub Actions 运行器会自动创建一个GITHUB_TOKEN密钥以在您的工作流程中进行身份验证。因此，您无需任何配置即可立即开始部​​署
-      #     publish_dir: ./public
-      #     allow_empty_commit: true # 允许空提交
-      # Use the output from the `deploy` step(use for test action)
-      # - name: Get the output
-      #   run: |
-      #     echo "${{ steps.deploy.outputs.notify }}"
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Checkout theme repo
+        uses: actions/checkout@v2
+        with:
+          repository: ${{ env.THEME_REPO }}
+          ref: ${{ env.THEME_BRANCH }}
+          path: themes/butterfly
+
+      - name: Checkout deploy repo
+        uses: actions/checkout@v2
+        with:
+          repository: ${{ env.DEPLOY_REPO }}
+          ref: ${{ env.DEPLOY_BRANCH }}
+          path: .deploy_git
+
+      - name: Use Node.js ${{ matrix.node_version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node_version }}
+
+      - name: Configuration environment
+        env:
+          HEXO_DEPLOY_PRI: ${{secrets.HEXO_DEPLOY_PRI}}
+        run: |
+          sudo timedatectl set-timezone "Asia/Shanghai"
+          mkdir -p ~/.ssh/
+          echo "$HEXO_DEPLOY_PRI" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          git config --global user.name $GIT_USER
+          git config --global user.email $GIT_EMAIL
+          cp _config.theme.yml themes/concise/_config.yml
+
+      - name: Install dependencies
+        run: |
+          npm install
+
+      - name: Deploy hexo
+        run: |
+          npm run deploy
