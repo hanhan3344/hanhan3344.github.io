@@ -3,9 +3,9 @@
 # --------------------------------------
 
 nav:
-  logo: https://hanhan3344-tx-bk-1313563340.cos.ap-guangzhou.myqcloud.com/typora/bronya02.png# image
+  logo: https://hanhan3344-tx-bk-1313563340.cos.ap-guangzhou.myqcloud.com/typora/bronya02.png # image
   display_title: true
-  fixed: true # fixed navigation bar
+  fixed: false # fixed navigation bar
 
 menu:
   首页: / || fas fa-home
