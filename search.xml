@@ -332,6 +332,31 @@
       </tags>
   </entry>
   <entry>
+    <title>修复内核更新失败导致的dkpg依赖错误</title>
+    <url>/2023/08/15/%E4%BF%AE%E5%A4%8D%E5%86%85%E6%A0%B8%E6%9B%B4%E6%96%B0%E5%A4%B1%E8%B4%A5%E5%AF%BC%E8%87%B4%E7%9A%84dkpg%E4%BE%9D%E8%B5%96%E9%94%99%E8%AF%AF/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="修复内核更新失败导致的-dpkg-依赖错误"><a class="markdownIt-Anchor" href="#修复内核更新失败导致的-dpkg-依赖错误"></a> 修复内核更新失败导致的 dpkg 依赖错误</h1>
+<h2 id="第一步备份"><a class="markdownIt-Anchor" href="#第一步备份"></a> 第一步：备份</h2>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo mv /var/lib/dpkg/info /var/lib/dpkg/info.bk</span><br></pre></td></tr></table></figure>
+<h2 id="第二步新建"><a class="markdownIt-Anchor" href="#第二步新建"></a> 第二步：新建</h2>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo mkdir /var/lib/dpkg/info</span><br></pre></td></tr></table></figure>
+<h2 id="第三步更新"><a class="markdownIt-Anchor" href="#第三步更新"></a> 第三步：更新</h2>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo apt-get update </span><br><span class="line">sudo apt-get -f install</span><br></pre></td></tr></table></figure>
+<h2 id="第四步替换"><a class="markdownIt-Anchor" href="#第四步替换"></a> 第四步：替换</h2>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo mv /var/lib/dpkg/info/* /var/lib/dpkg/info.bk</span><br></pre></td></tr></table></figure>
+<h2 id="第五步删除"><a class="markdownIt-Anchor" href="#第五步删除"></a> 第五步：删除</h2>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo rm -rf /var/lib/dpkg/info </span><br></pre></td></tr></table></figure>
+<h2 id="第六步还原"><a class="markdownIt-Anchor" href="#第六步还原"></a> 第六步：还原</h2>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo mv /var/lib/dpkg/info.bk /var/lib/dpkg/info </span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>ubuntu</tag>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>部署code-server让你在iPad上使用VScode</title>
     <url>/2022/12/07/%E9%83%A8%E7%BD%B2code-server%E8%AE%A9%E4%BD%A0%E5%9C%A8iPad%E4%B8%8A%E4%BD%BF%E7%94%A8VScode/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote>
