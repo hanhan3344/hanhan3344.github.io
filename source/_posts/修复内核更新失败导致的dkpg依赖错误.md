@@ -1,6 +1,6 @@
 ---
-title: 修复内核更新失败导致的 dpkg 依赖错误
-date: 2023-07-03 18:49:47
+title: 修复内核更新失败导致的dkpg依赖错误
+date: 2023-08-15 22:31:20
 tags: 
   - ubuntu
   - linux
