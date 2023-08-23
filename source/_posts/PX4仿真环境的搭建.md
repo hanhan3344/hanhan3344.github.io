@@ -7,8 +7,8 @@ tags:
   - docker
 categories: 
   - 南工御风
-top_img: https://images.weserv.nl/?url=https://hanhan3344-tx-bk-1313563340.cos.ap-guangzhou.myqcloud.com/typora/elysia05.jpg&default=https://hanhan3344-tx-bk-1313563340.cos.ap-guangzhou.myqcloud.com/typora/elysia05.jpg
-cover: https://images.weserv.nl/?url=https://hanhan3344-tx-bk-1313563340.cos.ap-guangzhou.myqcloud.com/typora/image.png&default=https://hanhan3344-tx-bk-1313563340.cos.ap-guangzhou.myqcloud.com/typora/image.png
+top_img: https://images.weserv.nl/?url=https://cdn.jsdelivr.net/gh/hanhan3344/pic/note_pic/elysia05.jpg&default=https://cdn.jsdelivr.net/gh/hanhan3344/pic/note_pic/elysia05.jpg
+cover: https://images.weserv.nl/?url=https://cdn.jsdelivr.net/gh/hanhan3344/pic/note_pic/image.png&default=https://cdn.jsdelivr.net/gh/hanhan3344/pic/note_pic/image.png
 ---
 
 # 通过Docker搭建（比较推荐）
@@ -55,7 +55,7 @@ cover: https://images.weserv.nl/?url=https://hanhan3344-tx-bk-1313563340.cos.ap-
 
 5. 设置里勾选 基于WSL 2的引擎  
 
-   ![image-20221205215205499](https://hanhan3344-tx-bk-1313563340.cos.ap-guangzhou.myqcloud.com/typora/image-20221205215205499.png)
+   ![image-20221205215205499](https://cdn.jsdelivr.net/gh/hanhan3344/pic/note_pic/image-20221205215205499.png)
 
 6. 在PowerShell中输入  
 
@@ -65,14 +65,14 @@ cover: https://images.weserv.nl/?url=https://hanhan3344-tx-bk-1313563340.cos.ap-
 
    可以发现docker已经在运行  
 
-   ![image-20221205215448505](https://hanhan3344-tx-bk-1313563340.cos.ap-guangzhou.myqcloud.com/typora/image-20221205215448505.png)
+   ![image-20221205215448505](https://cdn.jsdelivr.net/gh/hanhan3344/pic/note_pic/image-20221205215448505.png)
 
 
 ## 安装PX4仿真镜像
 
 7. 打开Docker Desktop, 并搜索 `px4-gazebo-headless`, 点击Pull拉取镜像.   
 
-   ![image-20221205220006231](https://hanhan3344-tx-bk-1313563340.cos.ap-guangzhou.myqcloud.com/typora/image-20221205220006231.png)
+   ![image-20221205220006231](https://cdn.jsdelivr.net/gh/hanhan3344/pic/note_pic/image-20221205220006231.png)
 
 8. 拉取成功后, 即可打开Ubuntu20.04, 运行  
 
@@ -84,13 +84,13 @@ cover: https://images.weserv.nl/?url=https://hanhan3344-tx-bk-1313563340.cos.ap-
 
    看到如下画面, 即代表px4 SITL仿真已成功启动  
 
-   ![image-20221205220551641](https://hanhan3344-tx-bk-1313563340.cos.ap-guangzhou.myqcloud.com/typora/image-20221205220551641.png)
+   ![image-20221205220551641](https://cdn.jsdelivr.net/gh/hanhan3344/pic/note_pic/image-20221205220551641.png)
 
-   ![image-20221205220525084](https://hanhan3344-tx-bk-1313563340.cos.ap-guangzhou.myqcloud.com/typora/image-20221205220525084.png)
+   ![image-20221205220525084](https://cdn.jsdelivr.net/gh/hanhan3344/pic/note_pic/image-20221205220525084.png)
 
    打开QGC, 飞机即可自动连接  
 
-   ![image-20221205220648562](https://hanhan3344-tx-bk-1313563340.cos.ap-guangzhou.myqcloud.com/typora/image-20221205220648562.png)
+   ![image-20221205220648562](https://cdn.jsdelivr.net/gh/hanhan3344/pic/note_pic/image-20221205220648562.png)
 
    终端输入  
 
@@ -100,7 +100,7 @@ cover: https://images.weserv.nl/?url=https://hanhan3344-tx-bk-1313563340.cos.ap-
 
    即可结束仿真  
 
-   ![image-20221205221320196](https://hanhan3344-tx-bk-1313563340.cos.ap-guangzhou.myqcloud.com/typora/image-20221205221320196.png)
+   ![image-20221205221320196](https://cdn.jsdelivr.net/gh/hanhan3344/pic/note_pic/image-20221205221320196.png)
 
 # 自行搭建（一般推荐）
 
@@ -122,7 +122,7 @@ cover: https://images.weserv.nl/?url=https://hanhan3344-tx-bk-1313563340.cos.ap-
 
    分别选择1, 3, 4 (配置环境需要用到的)  
 
-   ![image-20221205222351336](https://hanhan3344-tx-bk-1313563340.cos.ap-guangzhou.myqcloud.com/typora/image-20221205222351336.png)
+   ![image-20221205222351336](https://cdn.jsdelivr.net/gh/hanhan3344/pic/note_pic/image-20221205222351336.png)
 
 ## PX4安装
 
@@ -213,13 +213,13 @@ cover: https://images.weserv.nl/?url=https://hanhan3344-tx-bk-1313563340.cos.ap-
    make px4_sitl gazebo_plane
    ```
 
-   ![image-20221206185806648](https://hanhan3344-tx-bk-1313563340.cos.ap-guangzhou.myqcloud.com/typora/image-20221206185806648.png)
+   ![image-20221206185806648](https://cdn.jsdelivr.net/gh/hanhan3344/pic/note_pic/image-20221206185806648.png)
 
    当gazebo模拟器成功启动, 画面中出现小飞机, 终端出现类似这样的信息时
 
-   ![image-20221206185822088](https://hanhan3344-tx-bk-1313563340.cos.ap-guangzhou.myqcloud.com/typora/image-20221206185822088.png)
+   ![image-20221206185822088](https://cdn.jsdelivr.net/gh/hanhan3344/pic/note_pic/image-20221206185822088.png)
 
-   ![image-20221206185835038](https://hanhan3344-tx-bk-1313563340.cos.ap-guangzhou.myqcloud.com/typora/image-20221206185835038.png)
+   ![image-20221206185835038](https://cdn.jsdelivr.net/gh/hanhan3344/pic/note_pic/image-20221206185835038.png)
    
    说明仿真启动成功, 此时控制台输入
    
@@ -229,4 +229,4 @@ cover: https://images.weserv.nl/?url=https://hanhan3344-tx-bk-1313563340.cos.ap-
    
    即可退出仿真
    
-   ![image-20221206185924821](https://hanhan3344-tx-bk-1313563340.cos.ap-guangzhou.myqcloud.com/typora/image-20221206185924821.png)
+   ![image-20221206185924821](https://cdn.jsdelivr.net/gh/hanhan3344/pic/note_pic/image-20221206185924821.png)

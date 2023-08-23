@@ -6,7 +6,7 @@ tags:
   - linux
 categories: 
   - linux
-top_img: https://images.weserv.nl/?url=https://hanhan3344-tx-bk-1313563340.cos.ap-guangzhou.myqcloud.com/typora/elysia05.jpg&default=https://hanhan3344-tx-bk-1313563340.cos.ap-guangzhou.myqcloud.com/typora/elysia05.jpg
+top_img: https://images.weserv.nl/?url=https://cdn.jsdelivr.net/gh/hanhan3344/pic/note_pic/elysia05.jpg&default=https://cdn.jsdelivr.net/gh/hanhan3344/pic/note_pic/elysia05.jpg
 cover: https://images.weserv.nl/?url=https://cdn.jsdelivr.net/gh/hanhan3344/pic/note_pic/20230815220009.jpg&default=https://cdn.jsdelivr.net/gh/hanhan3344/pic/note_pic/20230815220009.jpg
 ---
 
