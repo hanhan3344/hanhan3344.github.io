@@ -18,7 +18,7 @@ cover: https://raw.githubusercontent.com/hanhan3344/pic/master/note_pic/20231011
 
 ![https://cdn.jsdelivr.net/gh/hanhan3344/pic/note_pic/20231011162842.jpg](https://cdn.jsdelivr.net/gh/hanhan3344/pic/note_pic/20231011162842.jpg)
 
-具备了产出逼真图片的能力，模型才可能在下一步去学习语义信息（guidance）。**DDPM的本质作用，是学习训练数据的分布，产出尽可能符合训练数据分布的真实图片。**所以，它也称为后续文生图类扩散模型框架的基石。
+具备了产出逼真图片的能力，模型才可能在下一步去学习语义信息（guidance）。**DDPM的本质作用，是学习训练数据的分布，产出尽可能符合训练数据分布的真实图片**。所以，它也称为后续文生图类扩散模型框架的基石。
 
 # 二、DDPM训练流程
 
