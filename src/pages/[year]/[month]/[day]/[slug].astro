@@ -1,0 +1,40 @@
+---
+import { getCollection } from 'astro:content';
+
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import { getLegacyPostPath, getLegacyPostSlug, getPostPath } from '../../../../lib/posts';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts', ({ data }) => !data.draft);
+
+  return posts.map((post) => ({
+    params: {
+      year: getLegacyPostPath(post).split('/')[1],
+      month: getLegacyPostPath(post).split('/')[2],
+      day: getLegacyPostPath(post).split('/')[3],
+      slug: getLegacyPostSlug(post),
+    },
+    props: {
+      target: getPostPath(post),
+      title: post.data.title,
+    },
+  }));
+}
+
+const { target, title } = Astro.props;
+---
+
+<BaseLayout title="Redirecting" description={`Legacy permalink for ${title}`}>
+  <meta slot="head" http-equiv="refresh" content={`0; url=${target}`} />
+
+  <section class="flex min-h-[50vh] items-center justify-center py-20">
+    <div class="surface-panel max-w-2xl p-8 text-center sm:p-12">
+      <p class="section-kicker">Legacy permalink</p>
+      <h1 class="mt-4 font-serif text-4xl tracking-[-0.03em] text-ink">This note has a new address.</h1>
+      <p class="mt-5 text-base leading-8 text-muted">
+        The content is preserved, but the site now uses a cleaner structure under <code>/writing/</code>.
+      </p>
+      <a href={target} class="mt-8 inline-flex rounded-full bg-accent px-5 py-3 text-sm font-medium text-white hover:bg-ink">Continue to article</a>
+    </div>
+  </section>
+</BaseLayout>

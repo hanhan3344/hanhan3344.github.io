@@ -1,0 +1,214 @@
+@import "tailwindcss";
+@import "katex/dist/katex.min.css";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --font-sans: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  --font-serif: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", "Noto Serif SC", "Source Han Serif SC", "Songti SC", Georgia, serif;
+
+  --color-canvas: #f5f1ea;
+  --color-panel: #fcfbf8;
+  --color-ink: #171717;
+  --color-muted: #5b5750;
+  --color-faint: #cbc3b8;
+  --color-accent: #1f3a5f;
+  --color-accent-soft: #e7eef7;
+}
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(31, 58, 95, 0.12), transparent 0, transparent 34%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.42) 0%, rgba(255, 255, 255, 0) 28%),
+    var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  transition:
+    color 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    opacity 180ms ease,
+    transform 180ms ease;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+::selection {
+  background: rgba(31, 58, 95, 0.18);
+  color: var(--color-ink);
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.section-kicker {
+  color: var(--color-accent);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+}
+
+.surface-panel {
+  background: rgba(252, 251, 248, 0.84);
+  border: 1px solid rgba(87, 83, 78, 0.12);
+  border-radius: 1.5rem;
+  box-shadow: 0 24px 80px -48px rgba(23, 23, 23, 0.35);
+  backdrop-filter: blur(16px);
+}
+
+.research-link {
+  color: var(--color-accent);
+  font-weight: 500;
+}
+
+.research-link:hover {
+  color: var(--color-ink);
+}
+
+.article-prose {
+  color: var(--color-muted);
+  font-size: 1.05rem;
+  line-height: 1.95;
+}
+
+.article-prose :where(h1, h2, h3, h4) {
+  color: var(--color-ink);
+  font-family: var(--font-serif);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.article-prose h2 {
+  margin-top: 3.5rem;
+  margin-bottom: 1.25rem;
+  font-size: 1.85rem;
+}
+
+.article-prose h3 {
+  margin-top: 2.6rem;
+  margin-bottom: 0.9rem;
+  font-size: 1.35rem;
+}
+
+.article-prose p,
+.article-prose ul,
+.article-prose ol,
+.article-prose blockquote,
+.article-prose pre,
+.article-prose table,
+.article-prose figure {
+  margin-top: 1.35rem;
+  margin-bottom: 1.35rem;
+}
+
+.article-prose ul,
+.article-prose ol {
+  padding-left: 1.35rem;
+}
+
+.article-prose li::marker {
+  color: rgba(31, 58, 95, 0.72);
+}
+
+.article-prose strong {
+  color: var(--color-ink);
+}
+
+.article-prose a {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-decoration-color: rgba(31, 58, 95, 0.24);
+  text-underline-offset: 0.2em;
+}
+
+.article-prose a:hover {
+  color: var(--color-ink);
+  text-decoration-color: rgba(23, 23, 23, 0.32);
+}
+
+.article-prose blockquote {
+  border-left: 3px solid rgba(31, 58, 95, 0.42);
+  background: rgba(255, 255, 255, 0.62);
+  border-radius: 1.1rem;
+  padding: 1.25rem 1.4rem;
+  color: var(--color-muted);
+}
+
+.article-prose code:not(pre code) {
+  background: rgba(31, 58, 95, 0.08);
+  border-radius: 0.45rem;
+  color: var(--color-accent);
+  font-size: 0.92em;
+  padding: 0.18rem 0.38rem;
+}
+
+.article-prose pre {
+  overflow-x: auto;
+  border: 1px solid rgba(87, 83, 78, 0.14);
+  border-radius: 1.25rem;
+  background: #fffdf9;
+  box-shadow: 0 20px 60px -52px rgba(23, 23, 23, 0.45);
+  padding: 1rem 1.1rem;
+}
+
+.article-prose pre code {
+  background: transparent;
+  color: inherit;
+  font-size: 0.92rem;
+  padding: 0;
+}
+
+.article-prose hr {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  border-color: rgba(87, 83, 78, 0.16);
+}
+
+.article-prose img {
+  width: 100%;
+  border: 1px solid rgba(87, 83, 78, 0.12);
+  border-radius: 1.25rem;
+  box-shadow: 0 28px 80px -54px rgba(23, 23, 23, 0.48);
+}
+
+.article-prose table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+}
+
+.article-prose th,
+.article-prose td {
+  border: 1px solid rgba(87, 83, 78, 0.12);
+  padding: 0.8rem 0.95rem;
+}
+
+.article-prose thead {
+  background: rgba(31, 58, 95, 0.06);
+}
+
+.article-prose mark {
+  background: linear-gradient(transparent 12%, rgba(31, 58, 95, 0.15) 12%, rgba(31, 58, 95, 0.15) 88%, transparent 88%);
+  color: inherit;
+  border-radius: 0.3rem;
+  padding: 0 0.18rem;
+}

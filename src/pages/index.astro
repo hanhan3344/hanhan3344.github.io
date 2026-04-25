@@ -1,0 +1,140 @@
+---
+import { getCollection } from 'astro:content';
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FeaturedPostCard from '../components/FeaturedPostCard.astro';
+import FocusCard from '../components/FocusCard.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import WritingListItem from '../components/WritingListItem.astro';
+import { focusAreas, siteData } from '../data/site';
+import { sortPosts } from '../lib/posts';
+
+const posts = sortPosts(await getCollection('posts', ({ data }) => !data.draft));
+const featuredPosts = posts.filter((post) => post.data.featured).slice(0, 3);
+const topicCount = new Set(posts.flatMap((post) => [...post.data.tags, ...post.data.categories])).size;
+const yearCount = new Set(posts.map((post) => post.data.date.getFullYear())).size;
+---
+
+<BaseLayout title={siteData.name} description={siteData.description} currentPath="/">
+  <section class="border-b border-stone-400/15 pb-16 pt-6 lg:pt-10">
+    <div class="grid gap-8 lg:grid-cols-[minmax(0,1.55fr)_minmax(300px,0.9fr)] lg:gap-10">
+      <div class="max-w-4xl">
+        <p class="section-kicker">Research notes · engineering essays</p>
+        <h1 class="mt-5 max-w-4xl font-serif text-[clamp(3rem,8vw,5.6rem)] leading-[0.92] tracking-[-0.04em] text-balance text-ink">
+          {siteData.name}
+        </h1>
+        <p class="mt-6 max-w-3xl text-balance font-serif text-[clamp(1.35rem,2vw,1.9rem)] leading-relaxed text-ink/88">
+          Research notes on autonomy, machine learning, and technical systems.
+        </p>
+        <p class="mt-6 max-w-2xl text-base leading-8 text-muted sm:text-lg">
+          这里收录了我关于自动飞行系统、生成式模型与底层工具链的长期技术笔记。它并非传统的“开发者博客”，而是作为一份持续演进的研究与工程工作台存在。
+        </p>
+
+        <div class="mt-8 grid max-w-3xl gap-4 sm:grid-cols-3">
+          <div class="rounded-[1.25rem] border border-stone-300/70 bg-white/62 px-4 py-4">
+            <p class="text-xs uppercase tracking-[0.2em] text-muted">Mode</p>
+            <p class="mt-2 font-serif text-lg text-ink">Long-form notes</p>
+          </div>
+          <div class="rounded-[1.25rem] border border-stone-300/70 bg-white/62 px-4 py-4">
+            <p class="text-xs uppercase tracking-[0.2em] text-muted">Method</p>
+            <p class="mt-2 font-serif text-lg text-ink">Read · test · document</p>
+          </div>
+          <div class="rounded-[1.25rem] border border-stone-300/70 bg-white/62 px-4 py-4">
+            <p class="text-xs uppercase tracking-[0.2em] text-muted">Archive</p>
+            <p class="mt-2 font-serif text-lg text-ink">{posts.length} indexed notes</p>
+          </div>
+        </div>
+
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="/writing" class="rounded-full bg-accent px-5 py-3 text-sm font-medium text-white shadow-[0_18px_40px_-22px_rgba(31,58,95,0.85)] hover:-translate-y-0.5 hover:shadow-[0_22px_45px_-20px_rgba(31,58,95,0.95)] hover:bg-ink">
+            Browse Archive
+          </a>
+          <a href="/about" class="rounded-full border border-stone-300/80 bg-white/70 px-5 py-3 text-sm font-medium text-ink hover:border-accent/35 hover:text-accent">
+            About the Site
+          </a>
+          <a href={siteData.github} target="_blank" rel="noreferrer" class="rounded-full border border-transparent px-5 py-3 text-sm font-medium text-muted hover:text-ink">
+            GitHub ↗
+          </a>
+        </div>
+      </div>
+
+      <aside class="surface-panel p-6 sm:p-7">
+        <p class="section-kicker">Current profile</p>
+        <dl class="mt-6 space-y-6">
+          <div>
+            <dt class="text-xs uppercase tracking-[0.22em] text-muted">Primary themes</dt>
+            <dd class="mt-2 font-serif text-xl leading-relaxed text-ink">Autonomous flight · Generative models · Systems tooling</dd>
+          </div>
+          <div class="grid grid-cols-2 gap-4 border-y border-stone-400/12 py-5">
+            <div>
+              <dt class="text-xs uppercase tracking-[0.22em] text-muted">Notes</dt>
+              <dd class="mt-2 font-serif text-3xl text-ink">{posts.length}</dd>
+            </div>
+            <div>
+              <dt class="text-xs uppercase tracking-[0.22em] text-muted">Topics</dt>
+              <dd class="mt-2 font-serif text-3xl text-ink">{topicCount}</dd>
+            </div>
+          </div>
+          <div>
+            <dt class="text-xs uppercase tracking-[0.22em] text-muted">Coverage</dt>
+            <dd class="mt-2 text-sm leading-7 text-muted">
+              Notes collected across {yearCount} publication years, spanning hardware deployment, simulation workflows, and theoretical reading notes.
+            </dd>
+          </div>
+          <div>
+            <dt class="text-xs uppercase tracking-[0.22em] text-muted">Orientation</dt>
+            <dd class="mt-2 text-sm leading-7 text-muted">
+              Writing is organized around reproducibility: each note tries to preserve enough context to be useful when revisited months later.
+            </dd>
+          </div>
+        </dl>
+      </aside>
+    </div>
+  </section>
+
+  <section class="py-16">
+    <SectionHeading
+      kicker="Focus areas"
+      title="Recurring threads in my research and engineering work."
+      intro="The archive currently clusters around three domains: flight-control systems, modern generative models, and the tooling required to make technical work reproducible."
+    />
+
+    <div class="grid gap-6 lg:grid-cols-3">
+      {focusAreas.map((area) => (
+        <FocusCard {...area} />
+      ))}
+    </div>
+  </section>
+
+  <section class="py-4">
+    <SectionHeading
+      kicker="Selected writing"
+      title="Entry points into the archive."
+      intro="Rather than surfacing every post chronologically, these notes best represent the core themes of the collection."
+    />
+
+    <div class="grid gap-6 lg:grid-cols-3">
+      {featuredPosts.map((post) => (
+        <FeaturedPostCard post={post} />
+      ))}
+    </div>
+  </section>
+
+  <section class="pt-16">
+    <SectionHeading
+      kicker="Archive"
+      title="Recent writing"
+      intro="Every note remains accessible in a cleaner archive view designed for long-form reading rather than blog-style browsing."
+    />
+
+    <div class="surface-panel overflow-hidden px-6 py-2 sm:px-8">
+      {posts.map((post) => (
+        <WritingListItem post={post} />
+      ))}
+    </div>
+
+    <div class="mt-6 flex justify-end">
+      <a href="/writing" class="research-link text-sm uppercase tracking-[0.22em]">Open complete archive →</a>
+    </div>
+  </section>
+</BaseLayout>

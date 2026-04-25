@@ -1,0 +1,37 @@
+---
+import { getCollection } from 'astro:content';
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import WritingListItem from '../../components/WritingListItem.astro';
+import { groupPostsByYear, sortPosts } from '../../lib/posts';
+
+const posts = sortPosts(await getCollection('posts', ({ data }) => !data.draft));
+const groups = groupPostsByYear(posts);
+---
+
+<BaseLayout title="Writing" description="Archive of research notes and engineering essays." currentPath="/writing">
+  <section class="border-b border-stone-400/15 pb-12 pt-6 lg:pt-10">
+    <p class="section-kicker">Writing archive</p>
+    <h1 class="mt-5 max-w-4xl font-serif text-[clamp(2.8rem,7vw,4.7rem)] leading-[0.96] tracking-[-0.04em] text-balance text-ink">
+      A cleaner archive for long-form technical notes.
+    </h1>
+    <p class="mt-6 max-w-3xl text-base leading-8 text-muted sm:text-lg">
+      所有文章按年份归档，保留原始内容，但用新的排版系统重新组织阅读体验。这里更像一份工作档案，而不是不断刷新的博客流。
+    </p>
+  </section>
+
+  <div class="space-y-10 py-14">
+    {groups.map(([year, entries]) => (
+      <section class="grid gap-6 lg:grid-cols-[120px_minmax(0,1fr)] lg:gap-8">
+        <div>
+          <p class="section-kicker">{year}</p>
+        </div>
+        <div class="surface-panel overflow-hidden px-6 py-2 sm:px-8">
+          {entries.map((post) => (
+            <WritingListItem post={post} />
+          ))}
+        </div>
+      </section>
+    ))}
+  </div>
+</BaseLayout>

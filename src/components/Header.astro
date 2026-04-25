@@ -1,0 +1,47 @@
+---
+import { siteData } from '../data/site';
+
+interface Props {
+  currentPath?: string;
+}
+
+const { currentPath = '/' } = Astro.props;
+
+const navItems = [
+  { href: '/', label: 'Home' },
+  { href: '/writing', label: 'Writing' },
+  { href: '/about', label: 'About' },
+  { href: siteData.github, label: 'GitHub', external: true },
+];
+
+const isActive = (href: string) => !href.startsWith('http') && (href === '/' ? currentPath === '/' : currentPath.startsWith(href));
+---
+<header class="mx-auto mb-10 w-full max-w-[1180px] px-6 pt-6 sm:px-8 lg:px-10 lg:pt-8">
+  <div class="surface-panel flex flex-col gap-5 px-5 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6">
+    <a href="/" class="group inline-flex items-center gap-4 text-ink">
+      <span class="flex h-11 w-11 items-center justify-center rounded-2xl border border-stone-300/70 bg-white/70 font-serif text-base tracking-[0.22em] text-accent shadow-[0_14px_34px_-24px_rgba(23,23,23,0.55)]">
+        ZH
+      </span>
+      <span class="flex flex-col">
+        <span class="font-serif text-xl tracking-tight text-ink group-hover:text-accent">{siteData.name}</span>
+        <span class="text-xs uppercase tracking-[0.22em] text-muted">{siteData.alias} · research notes</span>
+      </span>
+    </a>
+
+    <nav class="flex flex-wrap items-center gap-x-2 gap-y-2 text-sm text-muted">
+      {navItems.map((item) => (
+        <a
+          href={item.href}
+          class:list={[
+            'rounded-full px-3 py-2 hover:bg-white/75 hover:text-ink',
+            isActive(item.href) && 'bg-accent-soft text-accent',
+          ]}
+          target={item.external ? '_blank' : undefined}
+          rel={item.external ? 'noreferrer' : undefined}
+        >
+          {item.label}
+        </a>
+      ))}
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const legacyRedirects = {
+  '/writing/%E8%A7%A3%E8%AF%BDDenoising-Diffusion-Probabilistic-Models/': '/writing/ddpm-reading-notes/',
+  '/writing/PX4%E4%BB%BF%E7%9C%9F%E7%8E%AF%E5%A2%83%E7%9A%84%E6%90%AD%E5%BB%BA/': '/writing/px4-simulation-setup/',
+  '/writing/%E9%83%A8%E7%BD%B2code-server%E8%AE%A9%E4%BD%A0%E5%9C%A8iPad%E4%B8%8A%E4%BD%BF%E7%94%A8VScode/': '/writing/code-server-on-ipad/',
+  '/writing/%E4%BF%AE%E5%A4%8D%E5%86%85%E6%A0%B8%E6%9B%B4%E6%96%B0%E5%A4%B1%E8%B4%A5%E5%AF%BC%E8%87%B4%E7%9A%84dkpg%E4%BE%9D%E8%B5%96%E9%94%99%E8%AF%AF/': '/writing/fix-dpkg-dependency-errors/',
+  '/writing/QA01/': '/writing/qa01/',
+  '/writing/%E3%80%90%E9%A3%9E%E6%8E%A7%E3%80%9101-%E5%AE%89%E8%A3%85%E3%80%81%E6%8E%A5%E7%BA%BF%E3%80%81%E8%BF%9E%E6%8E%A5%E5%9C%B0%E9%9D%A2%E7%AB%99/': '/writing/flight-controller-setup-ground-station/',
+  '/2023/10/11/%E8%A7%A3%E8%AF%BDDenoising-Diffusion-Probabilistic-Models/': '/writing/ddpm-reading-notes/',
+  '/2022/12/05/PX4%E4%BB%BF%E7%9C%9F%E7%8E%AF%E5%A2%83%E7%9A%84%E6%90%AD%E5%BB%BA/': '/writing/px4-simulation-setup/',
+  '/2022/12/07/%E9%83%A8%E7%BD%B2code-server%E8%AE%A9%E4%BD%A0%E5%9C%A8iPad%E4%B8%8A%E4%BD%BF%E7%94%A8VScode/': '/writing/code-server-on-ipad/',
+  '/2023/08/15/%E4%BF%AE%E5%A4%8D%E5%86%85%E6%A0%B8%E6%9B%B4%E6%96%B0%E5%A4%B1%E8%B4%A5%E5%AF%BC%E8%87%B4%E7%9A%84dkpg%E4%BE%9D%E8%B5%96%E9%94%99%E8%AF%AF/': '/writing/fix-dpkg-dependency-errors/',
+  '/2023/07/03/QA01/': '/writing/qa01/',
+  '/2023/07/03/%E3%80%90%E9%A3%9E%E6%8E%A7%E3%80%9101-%E5%AE%89%E8%A3%85%E3%80%81%E6%8E%A5%E7%BA%BF%E3%80%81%E8%BF%9E%E6%8E%A5%E5%9C%B0%E9%9D%A2%E7%AB%99/': '/writing/flight-controller-setup-ground-station/',
+};
+---
+
+<BaseLayout title="404" description="Page not found.">
+  <script slot="head" is:inline define:vars={{ legacyRedirects }}>
+    const pathname = window.location.pathname;
+    const normalized = pathname.endsWith('/') ? pathname : `${pathname}/`;
+    const target = legacyRedirects[normalized] ?? legacyRedirects[pathname];
+
+    if (target) {
+      window.location.replace(target);
+    }
+  </script>
+
+  <section class="flex min-h-[60vh] items-center justify-center py-20">
+    <div class="surface-panel max-w-2xl p-8 text-center sm:p-12">
+      <p class="section-kicker">404</p>
+      <h1 class="mt-4 font-serif text-4xl tracking-[-0.03em] text-ink sm:text-5xl">This page has moved or no longer exists.</h1>
+      <p class="mt-5 text-base leading-8 text-muted">
+        The site was rebuilt from an older Hexo archive, so a handful of legacy links may no longer match the new structure.
+      </p>
+      <div class="mt-8 flex justify-center gap-3">
+        <a href="/" class="rounded-full bg-accent px-5 py-3 text-sm font-medium text-white hover:bg-ink">Go home</a>
+        <a href="/writing" class="rounded-full border border-stone-300/80 bg-white/70 px-5 py-3 text-sm font-medium text-ink hover:text-accent">Open archive</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

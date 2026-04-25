@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Tags moved" description="Tags have been folded into the new writing archive.">
+  <meta slot="head" http-equiv="refresh" content="0; url=/writing/" />
+
+  <section class="flex min-h-[50vh] items-center justify-center py-20">
+    <div class="surface-panel max-w-2xl p-8 text-center sm:p-12">
+      <p class="section-kicker">Moved</p>
+      <h1 class="mt-4 font-serif text-4xl tracking-[-0.03em] text-ink">Tags have been folded into the writing archive.</h1>
+      <p class="mt-5 text-base leading-8 text-muted">
+        The rebuilt site uses a cleaner archive structure instead of separate Hexo-style tag pages.
+      </p>
+      <a href="/writing/" class="mt-8 inline-flex rounded-full bg-accent px-5 py-3 text-sm font-medium text-white hover:bg-ink">Open writing archive</a>
+    </div>
+  </section>
+</BaseLayout>
