@@ -1,0 +1,69 @@
+---
+import { scholarProfile, scholarSyncNote } from '../data/scholar';
+import { siteData } from '../data/site';
+import { formatDate } from '../lib/posts';
+
+interface Props {
+  variant?: 'compact' | 'full';
+}
+
+const { variant = 'compact' } = Astro.props;
+
+const stats = [
+  {
+    label: 'Citations',
+    value: scholarProfile.stats.citations.all,
+    detail: `since 2021: ${scholarProfile.stats.citations.since2021}`,
+  },
+  {
+    label: 'h-index',
+    value: scholarProfile.stats.hIndex.all,
+    detail: `since 2021: ${scholarProfile.stats.hIndex.since2021}`,
+  },
+  {
+    label: 'i10-index',
+    value: scholarProfile.stats.i10Index.all,
+    detail: `since 2021: ${scholarProfile.stats.i10Index.since2021}`,
+  },
+  {
+    label: 'Open access',
+    value: scholarProfile.stats.openAccessPapers,
+    detail: `${scholarProfile.stats.restrictedAccessPapers} restricted`,
+  },
+];
+---
+
+<div class="space-y-5">
+  <div class="flex items-start justify-between gap-4">
+    <div>
+      <p class="font-serif text-xl tracking-[-0.02em] text-ink">Google Scholar</p>
+      <p class="mt-1 text-sm leading-7 text-muted">{siteData.affiliationZh}</p>
+    </div>
+
+    <a
+      href={scholarProfile.profileUrl}
+      target="_blank"
+      rel="noreferrer"
+      class="research-link shrink-0 text-sm uppercase tracking-[0.18em]"
+    >
+      Open ↗
+    </a>
+  </div>
+
+  <div class="grid gap-3 sm:grid-cols-2">
+    {stats.map((stat) => (
+      <div class="rounded-[1.1rem] border border-stone-300/70 bg-white/65 p-4">
+        <p class="text-xs uppercase tracking-[0.18em] text-muted">{stat.label}</p>
+        <p class="mt-2 font-serif text-3xl tracking-[-0.03em] text-ink">{stat.value}</p>
+        <p class="mt-1 text-xs leading-6 text-muted">{stat.detail}</p>
+      </div>
+    ))}
+  </div>
+
+  <div class="space-y-2 text-sm leading-7 text-muted">
+    <p>Verified email: {scholarProfile.verifiedEmail}</p>
+    {variant === 'full' && <p>Affiliation: {scholarProfile.affiliation}</p>}
+    <p>Snapshot updated {formatDate(scholarProfile.updatedAt)}.</p>
+    <p>{scholarSyncNote}</p>
+  </div>
+</div>

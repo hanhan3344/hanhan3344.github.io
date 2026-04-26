@@ -4,13 +4,18 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import FeaturedPostCard from '../components/FeaturedPostCard.astro';
 import FocusCard from '../components/FocusCard.astro';
+import PublicationCard from '../components/PublicationCard.astro';
+import ScholarSnapshot from '../components/ScholarSnapshot.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import WritingListItem from '../components/WritingListItem.astro';
 import { focusAreas, siteData } from '../data/site';
+import { sortPublications } from '../lib/publications';
 import { sortPosts } from '../lib/posts';
 
 const posts = sortPosts(await getCollection('posts', ({ data }) => !data.draft));
+const publications = sortPublications(await getCollection('publications'));
 const featuredPosts = posts.filter((post) => post.data.featured).slice(0, 3);
+const featuredPublications = publications.filter((publication) => publication.data.featured).slice(0, 2);
 const topicCount = new Set(posts.flatMap((post) => [...post.data.tags, ...post.data.categories])).size;
 const yearCount = new Set(posts.map((post) => post.data.date.getFullYear())).size;
 ---
@@ -52,6 +57,9 @@ const yearCount = new Set(posts.map((post) => post.data.date.getFullYear())).siz
           <a href="/about" class="rounded-full border border-stone-300/80 bg-white/70 px-5 py-3 text-sm font-medium text-ink hover:border-accent/35 hover:text-accent">
             About the Site
           </a>
+          <a href="/publications" class="rounded-full border border-stone-300/80 bg-white/70 px-5 py-3 text-sm font-medium text-ink hover:border-accent/35 hover:text-accent">
+            Publications
+          </a>
           <a href={siteData.github} target="_blank" rel="noreferrer" class="rounded-full border border-transparent px-5 py-3 text-sm font-medium text-muted hover:text-ink">
             GitHub ↗
           </a>
@@ -87,6 +95,9 @@ const yearCount = new Set(posts.map((post) => post.data.date.getFullYear())).siz
               Writing is organized around reproducibility: each note tries to preserve enough context to be useful when revisited months later.
             </dd>
           </div>
+          <div class="border-t border-stone-400/12 pt-5">
+            <ScholarSnapshot />
+          </div>
         </dl>
       </aside>
     </div>
@@ -103,6 +114,24 @@ const yearCount = new Set(posts.map((post) => post.data.date.getFullYear())).siz
       {focusAreas.map((area) => (
         <FocusCard {...area} />
       ))}
+    </div>
+  </section>
+
+  <section class="py-4">
+    <SectionHeading
+      kicker="Publications"
+      title="Scholar-facing work, integrated into the site."
+      intro="Instead of leaving papers as an external profile only, the site now keeps a publication archive, cached Scholar metrics, and room for explanatory blog notes on first-author work."
+    />
+
+    <div class="grid gap-6 lg:grid-cols-2">
+      {featuredPublications.map((publication) => (
+        <PublicationCard publication={publication} />
+      ))}
+    </div>
+
+    <div class="mt-6 flex justify-end">
+      <a href="/publications" class="research-link text-sm uppercase tracking-[0.22em]">Open publications →</a>
     </div>
   </section>
 

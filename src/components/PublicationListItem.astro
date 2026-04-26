@@ -1,0 +1,60 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { formatAuthorLine, formatCitationCount, getPublicationPath } from '../lib/publications';
+
+interface Props {
+  publication: CollectionEntry<'publications'>;
+}
+
+const { publication } = Astro.props;
+const href = getPublicationPath(publication);
+---
+
+<article class="border-b border-stone-400/12 py-7 last:border-0">
+  <div class="grid gap-5 lg:grid-cols-[150px_minmax(0,1fr)_160px] lg:gap-8">
+    <div class="space-y-2 text-sm text-muted">
+      <p class="section-kicker">{publication.data.year}</p>
+      <p>{publication.data.venueShort}</p>
+    </div>
+
+    <div class="min-w-0">
+      <div class="flex flex-wrap gap-2">
+        {publication.data.firstAuthor && (
+          <span class="rounded-full bg-accent-soft px-3 py-1 text-[0.72rem] uppercase tracking-[0.18em] text-accent">First author</span>
+        )}
+        {publication.data.blogSlug && (
+          <span class="rounded-full border border-stone-300/75 px-3 py-1 text-[0.72rem] uppercase tracking-[0.18em] text-muted">Has blog note</span>
+        )}
+      </div>
+
+      <h3 class="mt-4 font-serif text-2xl leading-tight tracking-[-0.03em] text-ink">
+        <a class="hover:text-accent" href={href}>{publication.data.title}</a>
+      </h3>
+      <p class="mt-3 text-sm leading-7 text-muted">{formatAuthorLine(publication.data.authors)}</p>
+      <p class="mt-3 text-sm leading-7 text-muted sm:text-base">{publication.data.description}</p>
+
+      <div class="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-sm">
+        <a class="research-link" href={href}>Details</a>
+        {publication.data.blogSlug && <a class="research-link" href={`/writing/${publication.data.blogSlug}/`}>Blog note</a>}
+        {publication.data.paperUrl && (
+          <a class="research-link" href={publication.data.paperUrl} target="_blank" rel="noreferrer">Paper ↗</a>
+        )}
+        {publication.data.pdfUrl && (
+          <a class="research-link" href={publication.data.pdfUrl} target="_blank" rel="noreferrer">PDF ↗</a>
+        )}
+        {publication.data.doiUrl && (
+          <a class="research-link" href={publication.data.doiUrl} target="_blank" rel="noreferrer">DOI ↗</a>
+        )}
+        {publication.data.codeUrl && (
+          <a class="research-link" href={publication.data.codeUrl} target="_blank" rel="noreferrer">Code ↗</a>
+        )}
+      </div>
+    </div>
+
+    <div class="space-y-2 text-sm text-muted lg:text-right">
+      <p class="text-xs uppercase tracking-[0.18em] text-muted">Scholar snapshot</p>
+      <p class="font-serif text-2xl text-ink">{publication.data.citations ?? '—'}</p>
+      <p>{formatCitationCount(publication.data.citations)}</p>
+    </div>
+  </div>
+</article>

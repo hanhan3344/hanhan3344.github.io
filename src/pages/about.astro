@@ -2,9 +2,13 @@
 import { getCollection } from 'astro:content';
 
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ScholarSnapshot from '../components/ScholarSnapshot.astro';
 import { focusAreas, siteData } from '../data/site';
+import { sortPublications } from '../lib/publications';
 
 const posts = await getCollection('posts', ({ data }) => !data.draft);
+const publications = sortPublications(await getCollection('publications'));
+const firstAuthorPublications = publications.filter((publication) => publication.data.firstAuthor).length;
 ---
 
 <BaseLayout title="About" description="About Zihao Han and the purpose of this site." currentPath="/about">
@@ -82,12 +86,27 @@ const posts = await getCollection('posts', ({ data }) => !data.draft);
             </dd>
           </div>
           <div>
+            <dt class="text-xs uppercase tracking-[0.18em] text-muted">Publications</dt>
+            <dd class="mt-1 font-serif text-3xl text-ink">{publications.length}</dd>
+          </div>
+          <div>
+            <dt class="text-xs uppercase tracking-[0.18em] text-muted">First-author papers</dt>
+            <dd class="mt-1">{firstAuthorPublications}</dd>
+          </div>
+          <div>
             <dt class="text-xs uppercase tracking-[0.18em] text-muted">Code</dt>
             <dd class="mt-1">
               <a class="research-link" href={siteData.github} target="_blank" rel="noreferrer">{siteData.github}</a>
             </dd>
           </div>
         </dl>
+      </section>
+
+      <section class="surface-panel p-6">
+        <p class="section-kicker">Scholar snapshot</p>
+        <div class="mt-5">
+          <ScholarSnapshot variant="full" />
+        </div>
       </section>
 
       <section class="surface-panel p-6">

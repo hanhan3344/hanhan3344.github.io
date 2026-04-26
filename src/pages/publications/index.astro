@@ -1,0 +1,83 @@
+---
+import { getCollection } from 'astro:content';
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PublicationCard from '../../components/PublicationCard.astro';
+import PublicationListItem from '../../components/PublicationListItem.astro';
+import ScholarSnapshot from '../../components/ScholarSnapshot.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import { scholarProfile } from '../../data/scholar';
+import { groupPublicationsByYear, sortPublications } from '../../lib/publications';
+
+const publications = sortPublications(await getCollection('publications'));
+const featuredPublications = publications.filter((publication) => publication.data.featured).slice(0, 3);
+const groups = groupPublicationsByYear(publications);
+const firstAuthorCount = publications.filter((publication) => publication.data.firstAuthor).length;
+---
+
+<BaseLayout title="Publications" description="Selected publications and scholar snapshot." currentPath="/publications">
+  <section class="border-b border-stone-400/15 pb-12 pt-6 lg:pt-10">
+    <div class="grid gap-8 lg:grid-cols-[minmax(0,1.3fr)_minmax(320px,0.8fr)] lg:gap-10">
+      <div>
+        <p class="section-kicker">Publications</p>
+        <h1 class="mt-5 max-w-4xl font-serif text-[clamp(2.8rem,7vw,4.8rem)] leading-[0.96] tracking-[-0.04em] text-balance text-ink">
+          Papers, Scholar snapshot, and a place to expand first-author work into readable notes.
+        </h1>
+        <p class="mt-6 max-w-3xl text-base leading-8 text-muted sm:text-lg">
+          这里把 Google Scholar 上的论文信息同步进了站点，但采用的是稳定的静态快照方式：论文元数据可精修，引用数是可追踪的缓存值，而不是脆弱的实时抓取。
+        </p>
+
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href={scholarProfile.profileUrl} target="_blank" rel="noreferrer" class="rounded-full bg-accent px-5 py-3 text-sm font-medium text-white hover:bg-ink">
+            Open Google Scholar ↗
+          </a>
+          <a href="/writing/asyncdsb-reading-note/" class="rounded-full border border-stone-300/80 bg-white/70 px-5 py-3 text-sm font-medium text-ink hover:border-accent/35 hover:text-accent">
+            Read first-author blog note
+          </a>
+        </div>
+      </div>
+
+      <aside class="surface-panel p-6 sm:p-7">
+        <ScholarSnapshot variant="full" />
+      </aside>
+    </div>
+  </section>
+
+  <section class="py-16">
+    <SectionHeading
+      kicker="Selected papers"
+      title="A small set of highlighted publications."
+      intro="Featured entries surface the work that best introduces your current research direction, while first-author items can additionally branch into explanatory blog posts."
+    />
+
+    <div class="grid gap-6 lg:grid-cols-3">
+      {featuredPublications.map((publication) => (
+        <PublicationCard publication={publication} />
+      ))}
+    </div>
+  </section>
+
+  <section class="pb-6">
+    <SectionHeading
+      kicker="Full list"
+      title="Chronological archive"
+      intro="The archive keeps bibliographic metadata, Scholar citation snapshots, and links back to paper pages, PDFs, and blog notes when available."
+    />
+
+    <div class="space-y-10">
+      {groups.map(([year, entries]) => (
+        <section class="grid gap-6 lg:grid-cols-[110px_minmax(0,1fr)] lg:gap-8">
+          <div>
+            <p class="section-kicker">{year}</p>
+          </div>
+
+          <div class="surface-panel overflow-hidden px-6 py-2 sm:px-8">
+            {entries.map((publication) => (
+              <PublicationListItem publication={publication} />
+            ))}
+          </div>
+        </section>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
